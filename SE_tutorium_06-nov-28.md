@@ -7,6 +7,51 @@
 4. Grundlagen Refactoring
 5. Task für Hausaufgabe 5 verstanden haben
 
+<details>
+Funny things of HWK2
+
+Tested and reviewed locally.
+
+Throughout the code you have changed formatting by creating a space between
+the curly brackets and else-if statements. Please revert these changes.
+Main.java Line 242: Please do not use capital letters for variables.
+
+Game runs without any issues and as the issue described it, so if you fix above mentioned issues, I can approve.
+
+
+features should have an acceptance criteria:
+a clear and deterministic list of things that must be completed when the feature is done:
+- room 2 has "evil monster" npc in it, that can be fought and drops 2 gold coins
+- when player uses "rizz", trader NPC lowers price by 20% once
+
+=> reviewer should have a checklist to see if the feature has all 
+
+
+demonstrate your new features.
+give a very precise list on what to do, to see the new feature:
+go to room 2 (library), use FIGHT to fight snake
+your feature is pointless, if the customer cant see it.
+
+
+bitte vermeidet anonyme class instanzen.
+macht eine eigene, explizite klasse "Sword" mit eigener datei etc.
+Mit deiner Implementation von Sword kann man es nur am name erkennen, nicht an der klasse (schlecht)
+wiederverwenden kann man es auch nicht.
+
+"item.getName().equalsIgnoreCase("SWORD")"
+böse böse böse
+das sollte "item instanceOf sword" sein
+
+
+use randomness = bad, cant control for debugging/testing.
+use seeded randomness = good, controllable.
+
+
+hört auf in hausaufgaben zu denken.
+euer feature sollte als standalone funktionieren, und nicht nur halbfertig sein, weil ihr auf irgend ein anderes wartet.
+
+</details>
+
 ## Homework questions
 
 https://www.mentimeter.com/app/presentation/aldhz1wzgjqoo5wuiir8r4w4j5wcv49c/qdzc2nwbaqa5/edit
