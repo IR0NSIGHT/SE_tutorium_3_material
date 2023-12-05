@@ -3,7 +3,11 @@ enum Direction:
   case Up, Down, Left, Right, Forward, Backward
 
 
-class Position3D(x: Int, y: Int, z: Int):
+case class Pos3d(x: Int, y: Int, z: Int)
+
+
+
+class Position3D(var x: Int, var y: Int, var z: Int) :
   /*
  * Move the position in the given direction
  * @param move the direction to move
@@ -20,6 +24,14 @@ class Position3D(x: Int, y: Int, z: Int):
     }
   }
 
+  override def equals(obj: Any): Boolean =
+    obj match {
+      case p: Position3D => return (p.x==x && p.y ==y && p.z == z)
+      case _ => false
+    }
+
+  override def toString: String = ""+x+","+y+","+z
+
 
 trait MazeElement:
   def position: Position3D
@@ -32,11 +44,12 @@ class Exit(val position3D: Position3D) extends MazeElement:
   def position: Position3D = position3D
 
 
-class Player(var position3D: Position3D) extends MazeElement {
-  def position: Position3D = position3D
+class Player(var pos: Position3D) extends MazeElement {
+  def position: Position3D = pos
   def move(direction: Direction): Unit = {
-    position3D = position3D.move(direction)
+    pos = pos.move(direction)
   }
+
 }
 
 class Maze {
@@ -68,16 +81,31 @@ class Maze {
   }
 }
 
-@main
-def main() =
-  println("Hello, world!")
-  val maze = new Maze()
-    .addMazeElement(Wall(Position3D(1, 0, 0)))
-    .addMazeElement(Wall(Position3D(0, 1, 0)))
-    .addMazeElement(Exit(Position3D(2, 0, 0)))
-    .addMazeElement(Player(Position3D(0, 0, 0)))
+def equalsApprox(a: Float, b: Float): Unit = {
+ Math.abs(a-b) < 0.00000001
+}
 
-  maze.movePlayer(Direction.Forward)
-  maze.movePlayer(Direction.Right)
-  maze.movePlayer(Direction.Forward)
-  println("Game Over: " + maze.isGameOver)
+object Apple {
+  @main
+  def helloWorld() =
+    println("Hello, world!")
+    val myPlayer = Player(Position3D(0, 0, 0))
+    val maze = new Maze()
+      .addMazeElement(Wall(Position3D(1, 0, 0)))
+      .addMazeElement(Wall(Position3D(0, 1, 0)))
+      .addMazeElement(Exit(Position3D(2, 0, 0)))
+      .addMazeElement(myPlayer)
+
+
+
+    maze.movePlayer(Direction.Forward)
+    assert(myPlayer.pos.equals(Position3D(0,0,1)))
+    maze.movePlayer(Direction.Backward)
+    assert(myPlayer.pos.equals(Position3D(0,0,0)))
+
+    
+
+    maze.movePlayer(Direction.Right)
+    maze.movePlayer(Direction.Forward)
+    println("Game Over: " + maze.isGameOver)
+}

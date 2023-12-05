@@ -2,9 +2,13 @@ import scala.io.Source
 import scala.collection.mutable
 
 def printHistogram(filename: String): Unit = {
-  var lines: List[String] = Source.fromFile(filename).getLines.toList
+  val lines: List[String] = Source.fromFile(filename).getLines.toList
   var gradeCounter: mutable.HashMap[String, Int] = mutable.HashMap()
-  var grade: String = null
+  var grade: String = ""
+  /*
+  *
+  */
+
   lines.foreach { line =>
     grade = line.split(",")(1) // grade is stored in second column
     if (gradeCounter.contains(grade)) {
